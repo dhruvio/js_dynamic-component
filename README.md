@@ -1,11 +1,11 @@
 # dynamic-componet
 
-Add functional components to your HTML. This library is a thin wrapper around virtual-dom. 
+Minimal functional components for websites. This library is a thin wrapper around `virtual-dom`.
 
 
 ## Motivation
 
-Dynamic Component is a module that simplifies adding dynamic behaviour to HTML pages. It is common for developers to use jQuery to add dynamic elements like carousels or accordions, and for those simple cases, the recommended tool is jQuery. However, for more complicated scenarios, dynamic-component aims to provide an expressive and powerful way to dynamically manipulate HTML by leveraging the virtual-dom library and stateful change propagation.
+Dynamic Component is a module that simplifies adding dynamic behaviour to HTML pages with JavaScript. It is common for developers to use jQuery to add dynamic elements like carousels or accordions, and for those simple cases, the recommended tool is jQuery. However, for more complicated scenarios, dynamic-component aims to provide an expressive and powerful way to dynamically manipulate HTML by leveraging the virtual-dom library and stateful change propagation.
 
 This library also uses the dom-delegator package to handle global DOM event delegation to ensure virtual-dom's EvHooks work as expected.
 
@@ -24,6 +24,7 @@ This library also uses the dom-delegator package to handle global DOM event dele
 
 // import dynamic-componet and set up the scope
 var dc = require("dynamic-component");
+var $ = require("jquery");
 // create the state mutator that will dynamically update the DOM
 var stateMutator = dc.createState({ url: null });
 // query the DOM for the element to contain the dynamic behaviour
