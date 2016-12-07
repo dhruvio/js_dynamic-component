@@ -1,0 +1,23 @@
+{
+  "name": "dynamic-component",
+  "version": "1.0.0",
+  "description": "Add functional components to your HTML. This library is a thin wrapper around virtual-dom. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhruvio/dynamic-component.git"
+  },
+  "author": "Dhruv Dang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dhruvio/dynamic-component/issues"
+  },
+  "homepage": "https://github.com/dhruvio/dynamic-component#readme",
+  "dependencies": {
+    "dom-delegator": "^13.1.0",
+    "virtual-dom": "^2.1.1"
+  }
+}
