@@ -4,8 +4,11 @@
   "description": "Add functional components to your HTML. This library is a thin wrapper around virtual-dom. ",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/browserify index.js -o build/dynamic-component.js",
+    "build": "mkdir -p build; rm -rf build/*; npm run build-node-min; npm run build-umd-min;",
+    "build-node": "./node_modules/.bin/browserify index.js -o build/dynamic-component.node.js",
+    "build-node-min": "npm run build-node; ./node_modules/.bin/uglifyjs build/dynamic-component.node.js -o build/dynamic-component.node.min.js",
     "build-umd": "./node_modules/.bin/browserify index.js -o build/dynamic-component.umd.js -s dynamic-component",
+    "build-umd-min": "npm run build-umd; ./node_modules/.bin/uglifyjs build/dynamic-component.umd.js -o build/dynamic-component.umd.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +28,7 @@
     "virtual-dom": "^2.1.1"
   },
   "devDependencies": {
-    "browserify": "^13.1.1"
+    "browserify": "^13.1.1",
+    "uglify-js": "^2.7.5"
   }
 }
