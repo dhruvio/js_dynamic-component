@@ -7,6 +7,7 @@
 
 var domDelegator  = require("dom-delegator");
 var virtualDOM    = require("virtual-dom");
+var window        = require("global/window");
 var cloneDeep     = require("lodash/cloneDeep");
 var merge         = require("lodash/merge");
 var isPlainObject = require("lodash/isPlainObject");
@@ -63,8 +64,16 @@ function createState (state) {
 
   function queuePublish () {
     if (!publishQueued) {
-      window.requestAnimationFrame(publish);
+      nextTick(publish);
       publishQueued = true;
+    }
+  }
+
+  function nextTick (fn) {
+    if (isFunction(window.requestAnimationFrame)) {
+      window.requestAnimationFrame(fn);
+    } else {
+      setTimeout(fn, 0);
     }
   }
 
@@ -97,7 +106,7 @@ function createState (state) {
   };
 }
 
-return {
+module.exports = {
   h: h,
   createState: createState,
   bind: bind
