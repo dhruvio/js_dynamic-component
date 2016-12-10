@@ -9,7 +9,7 @@ var domDelegator  = require("dom-delegator");
 var virtualDOM    = require("virtual-dom");
 var window        = require("global/window");
 var cloneDeep     = require("lodash/cloneDeep");
-var merge         = require("lodash/merge");
+var assign        = require("lodash/assign");
 var isPlainObject = require("lodash/isPlainObject");
 var isFunction    = require("lodash/isFunction");
 var noop          = require("lodash/noop");
@@ -81,7 +81,8 @@ function createState (state) {
     get: get,
 
     set: function (newValues, silent, shouldGet) {
-      merge(state, newValues);
+      // shallow assign
+      assign(state, newValues);
       // emit new state to subscriptions
       if (!silent) {
         queuePublish();

@@ -66,7 +66,7 @@ The following table describes the various functions that are part of this packag
 | `dc.createState` | initialState :: Optional Object -><br>stateMutator :: Object | Creates a state mutator. |
 | `dc.bind` | stateMutator :: Object -><br>render :: (state :: Object -> vtree :: VTree) -><br>element :: HTMLElement -><br>undefined | Binds a state mutator and render function to an element returned from `document.querySelector`. |
 | `stateMutator.get` | -> state :: Object | Returns a deep copy of the state object. |
-| `stateMutator.set` | newStateValues :: Object -><br>silent=false :: Boolean -><br>shouldGet=false :: Boolean -><br>state :: Object OR undefined | Update the state, by performing a deep assign of `newStateValues` to the original state object. Optionally operates silently without triggering a re-render, and optionally returns a deep copy of the new state. |
+| `stateMutator.set` | newStateValues :: Object -><br>silent=false :: Boolean -><br>shouldGet=false :: Boolean -><br>state :: Object OR undefined | Update the state, by performing a shallow assign of `newStateValues` to the original state object. Optionally operates silently without triggering a re-render, and optionally returns a deep copy of the new state. |
 | `stateMutator.subscribe` | handler :: (state :: Object -> undefined) -><br>unsubscribe :: (-> undefined) | Subscribe to state changes persisted with `stateMutator.set`. Returns a function that unsubscribes the subscription. |
 
 
