@@ -57,10 +57,10 @@ function createState (state) {
 
   function publish () {
     var newState = get();
+    publishQueued = false;
     subscriptions.forEach(function (handler) {
       handler(newState);
     });
-    publishQueued = false;
   }
 
   function queuePublish () {
