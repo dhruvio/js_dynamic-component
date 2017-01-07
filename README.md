@@ -26,7 +26,7 @@ This library also uses the dom-delegator package to handle global DOM event dele
 var dc = require("dynamic-component");
 var $ = require("jquery");
 // create the state mutator that will dynamically update the DOM
-var stateMutator = dc.createState({ url: null });
+var stateMutator = dc.state({ url: null });
 // query the DOM for the element to contain the dynamic behaviour
 var element = document.querySelector("#container");
 
@@ -58,12 +58,12 @@ dc.bind(stateMutator, render, element);
 
 ## API
 
-The following table describes the various functions that are part of this package. Functions prefixed by `dc` are part of the object exported from `dynamic-component` directly, while those prefixed by `stateMutator` represent the functions in the object returned by `dc.createState`.
+The following table describes the various functions that are part of this package. Functions prefixed by `dc` are part of the object exported from `dynamic-component` directly, while those prefixed by `stateMutator` represent the functions in the object returned by `dc.state`.
 
 | Function | Type Signature | Description |
 |---|---|---|
 | `dc.h` | See [virtual-hyperscript](https://github.com/Matt-Esch/virtual-dom/tree/master/virtual-hyperscript) | The [virtual-hyperscript](https://github.com/Matt-Esch/virtual-dom/tree/master/virtual-hyperscript) function packaged with `virtual-dom`. |
-| `dc.createState` | initialState :: Optional Object -><br>stateMutator :: Object | Creates a state mutator. |
+| `dc.state` | initialState :: Optional Object -><br>stateMutator :: Object | Creates a state mutator. |
 | `dc.bind` | stateMutator :: Object -><br>render :: (state :: Object -> vtree :: VTree) -><br>element :: HTMLElement -><br>undefined | Binds a state mutator and render function to an element returned from `document.querySelector`. |
 | `stateMutator.get` | -> state :: Object | Returns a deep copy of the state object. |
 | `stateMutator.set` | newStateValues :: Object -><br>silent=false :: Boolean -><br>shouldGet=false :: Boolean -><br>state :: Object OR undefined | Update the state, by performing a shallow assign of `newStateValues` to the original state object. Optionally operates silently without triggering a re-render, and optionally returns a deep copy of the new state. |

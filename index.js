@@ -41,7 +41,7 @@ function bind (state, render, element) {
   return state;
 }
 
-function createState (state) {
+function state (state) {
   if (!isPlainObject(state)) {
     state = {};
   }
@@ -109,6 +109,6 @@ function createState (state) {
 
 module.exports = {
   h: h,
-  createState: createState,
+  state: state,
   bind: bind
 };
