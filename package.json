@@ -1,7 +1,7 @@
 {
   "name": "dynamic-component",
   "version": "3.0.0",
-  "description": "Minimal functional components for websites. This library is a thin wrapper around virtual-dom.",
+  "description": "Minimal functional components for websites. This library can be used as a full front-end framework, or as a drop-in utility for building dynamic components in existing web pages.",
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p build; rm -rf build/*; npm run build-node-min; npm run build-umd-min;",

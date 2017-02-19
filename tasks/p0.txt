@@ -1,0 +1,2 @@
+update README.md for 3.0.0 API | id:2fc04268291182332d1fa6994214c5722de8a7fd
+update CREDITS.md to include immutable.js license | id:6825d0f97a279cdf7eeef365734ac8f9859f3455
