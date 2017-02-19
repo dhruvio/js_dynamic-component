@@ -1,8 +1,8 @@
 {
   "name": "dynamic-component",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Minimal functional components for websites. This library is a thin wrapper around virtual-dom.",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "mkdir -p build; rm -rf build/*; npm run build-node-min; npm run build-umd-min;",
     "build-node": "./node_modules/.bin/browserify src/index.js -o build/dynamic-component.node.js",
