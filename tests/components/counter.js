@@ -33,7 +33,7 @@ function component (h, log) {
     require("../../effects/animation-frame")("animationFrame")
   ];
 
-  function render (update, state) {
+  function render (state, update) {
     log.info("render", state);
     return h("section", [
       h("button", {

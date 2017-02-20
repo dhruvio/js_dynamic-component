@@ -13,7 +13,7 @@ module.exports = function make (actionName = "animationFrame") {
     });
   }
 
-  return function effect (update) {
+  return function effect (state, update) {
     if (!request)
       request = run(frame => update("animationFrame", { frame }));
   };

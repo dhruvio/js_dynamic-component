@@ -14,7 +14,7 @@ module.exports = function make (render, element) {
   let root;
   let initialized = false;
 
-  return function effect (update, state) {
+  return function effect (state, update) {
 
     if (!initialized) {
       // set up the dom delegator to delegate DOM events.
@@ -22,7 +22,7 @@ module.exports = function make (render, element) {
       // ensures it only affects global state once.
       domDelegator();
       // set up the initial virtual tree and DOM element
-      tree = render(update, state);
+      tree = render(state, update);
       root = create(tree);
       // append the component root to the parent element
       element.appendChild(root);
@@ -30,7 +30,7 @@ module.exports = function make (render, element) {
       initialized = true;
     } else {
       // diff and persist changed to the virtual app tree
-      const newTree = render(update, state);
+      const newTree = render(state, update);
       const patches = diff(tree, newTree);
       root = patch(root, patches);
       tree = newTree;

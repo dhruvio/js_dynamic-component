@@ -59,7 +59,7 @@ function loop (actions = {}, effects = [], state) {
   function runEffects (state) {
     // effects receive a plain JS object, not an immutable Map
     const jsState = state.toJS();
-    effects.forEach(effect => effect(update, jsState));
+    effects.forEach(effect => effect(jsState, update));
   }
   // set up the update function to persist state updates
   function update (actionName, data) {
