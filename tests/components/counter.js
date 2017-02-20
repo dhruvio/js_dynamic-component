@@ -5,7 +5,8 @@ function component (h, log) {
   function init () {
     log.info("init");
     return {
-      counter: 0
+      counter: 0,
+      lastFrame: 0
     };
   }
 
@@ -20,14 +21,16 @@ function component (h, log) {
     },
 
     animationFrame: function (state, data) {
-      log.debug("animationFrame", data);
-      return state
+      const elapsed = data.frame - state.get('lastFrame');
+      const fps = 1000 / elapsed;
+      log.debug("animationFrame", { fps });
+      return state.set('lastFrame', data.frame);
     }
 
   };
 
   const effects = [
-    require("../../effects/animation-frame")
+    require("../../effects/animation-frame")("animationFrame")
   ];
 
   function render (update, state) {

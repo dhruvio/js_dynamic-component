@@ -2,45 +2,19 @@
 
 const window = require("global/window");
 
-module.exports = function animationFrame (actionName = "animationFrame") {
+module.exports = function make (actionName = "animationFrame") {
 
-  // controlled by subscribe/unsubscribe actions
-  let active = false; 
-  // controlled by run internally to prevent concurrent frame requests
-  let stopped = true; 
+  let request = null;
 
   function run (callback) {
-    if (stopped) {
-      stopped = false;
-      window.requestAnimationFrame(frame => {
-        if (active) {
-          callback(frame);
-          next(callback);
-        } else {
-          stopped = true;
-        }
-      });
-    }
+    return window.requestAnimationFrame(frame => {
+      callback(frame);
+      run(callback);
+    });
   }
 
-  function subscribe (update) {
-    if (!active) {
-      active = true;
-      run(frame => update("animationFrame", { frame }));
-    }
-  }
-
-  function unsubscribe () {
-    active = false;
-  }
-
-  return function (update, state) {
-    const shouldSubscribe = true; // boolean value based on state
-    if (shouldSubscribe) {
-      subscribe(update);
-    } else {
-      unsubscribe();
-    }
+  return function effect (update) {
+    if (!request)
+      request = run(frame => update("animationFrame", { frame }));
   };
-
 };
