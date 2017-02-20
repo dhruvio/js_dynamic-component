@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dhruvio/dynamic-component.git"
+    "url": "git+https://github.com/dhruvio/js_dynamic-component.git"
   },
   "author": "Dhruv Dang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dhruvio/dynamic-component/issues"
+    "url": "https://github.com/dhruvio/js_dynamic-component/issues"
   },
-  "homepage": "https://github.com/dhruvio/dynamic-component#readme",
+  "homepage": "https://github.com/dhruvio/js_dynamic-component#readme",
   "dependencies": {
     "dom-delegator": "^13.1.0",
     "global": "^4.3.1",

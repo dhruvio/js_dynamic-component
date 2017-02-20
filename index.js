@@ -57,9 +57,7 @@ function loop (actions = {}, effects = [], state) {
   let promise = Promise.resolve(state);
   // helper to run effects
   function runEffects (state) {
-    // effects receive a plain JS object, not an immutable Map
-    const jsState = state.toJS();
-    effects.forEach(effect => effect(jsState, update));
+    effects.forEach(effect => effect(state, update));
   }
   // set up the update function to persist state updates
   function update (actionName, data) {
