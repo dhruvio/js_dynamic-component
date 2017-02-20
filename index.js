@@ -5,7 +5,6 @@
 
 "use strict";
 
-const document      = require("global/document");
 const window        = require("global/window");
 const isPlainObject = require("lodash/isPlainObject");
 const isArray    = require("lodash/isArray");
@@ -14,7 +13,7 @@ const immutable     = require("immutable");
 const domDelegator  = require("dom-delegator");
 const virtualDOM    = require("virtual-dom");
 
-const log     = require("./services/logger").create("dynamic-component");
+const log     = require("./services/logger")("dynamic-component");
 const h       = virtualDOM.h;
 const patch   = virtualDOM.patch;
 const diff    = virtualDOM.diff;
@@ -23,9 +22,7 @@ const Promise = window.Promise;
 
 module.exports = bind;
 
-function bind (element = document.body, { init, render, actions, effects }) {
-  // compose logger for bind
-  const log = log.create("bind");
+function bind (element, { init, render, actions, effects }) {
   // set up the dom delegator to delegate DOM events.
   // it's okay to run this multiple times, as DOM delegator
   // ensures it only affects global state once.
@@ -43,11 +40,11 @@ function bind (element = document.body, { init, render, actions, effects }) {
   if (!isArray(effects))
     log.error("component.effects must be an array", { effects });
   // initialize the component state
-  const state = intializeState(init);
+  const state = initializeState(init);
   // create update function, and manage update loop
   const update = startUpdateLoop(actions, effects.concat(apply), state);
   // set up the initial virtual tree and DOM element
-  let tree = render(update, state);
+  let tree = render(update, state.toJS());
   let root = create(tree);
   // append the component root to the parent element
   element.appendChild(root);
@@ -64,7 +61,7 @@ function initializeState (init) {
   // create the seed object
   const seed = init();
   // validate the seed object
-  if (!isPlainObject(init))
+  if (!isPlainObject(seed))
     return log.error("invalid seed state from init, must be a plain object", { seed });
   // marshall the seed object into an immutable JS map
   return immutable.fromJS(seed);
@@ -80,11 +77,22 @@ function startUpdateLoop (actions = {}, effects = [], state) {
   // return the update function accessible to API consumers
   return function update (actionName, data) {
     // update the promise state to reflect the latest update
-                     // run the action
-    promise = promise.then(state => action(state, data))
-                     // disperse the new state to the effects
+    promise = promise.then(state => {
+                       // lookup and validate the action
+                       const action = actions[actionName];
+                       if (!isFunction(action)) {
+                         log.warn("invalid action", { actionName, action });
+                         // return unmodified state
+                         return state;
+                       }
+                       // run the action
+                       return action(state, data);
+                     })
                      .then(state => {
-                       effects.forEach(effect => effect(update, state));
+                       // disperse the new state to the effects
+                       // effects receive a plain JS object, not an immutable Map
+                       const jsState = state.toJS();
+                       effects.forEach(effect => effect(update, jsState));
                        return state;
                      });
   };
