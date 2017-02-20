@@ -89,6 +89,9 @@ function startUpdateLoop (actions = {}, effects = [], state) {
                        return action(state, data);
                      })
                      .then(state => {
+                       //TODO
+                         // maybe compare old/new state
+                         // if no change, don't propagate to effects?
                        // disperse the new state to the effects
                        // effects receive a plain JS object, not an immutable Map
                        const jsState = state.toJS();
