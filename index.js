@@ -13,6 +13,7 @@ var assign        = require("lodash/assign");
 var isPlainObject = require("lodash/isPlainObject");
 var isFunction    = require("lodash/isFunction");
 var noop          = require("lodash/noop");
+var svg           = require("virtual-dom/virtual-hyperscript/svg");
 
 var h      = virtualDOM.h;
 var patch  = virtualDOM.patch;
@@ -109,6 +110,7 @@ function createState (state) {
 
 module.exports = {
   h: h,
+  svg: svg,
   createState: createState,
   bind: bind
 };

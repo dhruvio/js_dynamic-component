@@ -1,6 +1,6 @@
 {
   "name": "@dhruvio/dynamic-component",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Minimal functional components for websites. This library is a thin wrapper around virtual-dom.",
   "main": "index.js",
   "scripts": {

@@ -2,6 +2,10 @@
 
 Versions' commits are tagged by their version number.
 
+## 2.1.0
+
+- Re-export the `svg` function from the `virtual-dom` package to support rendering SVG elements.
+
 ## 2.0.1
 
 - [bugfix] Re-opened state change publishing earlier than previously (by setting `publishQueued = false` earlier) to prevent some state updates from being missed. In particular, updates that would happen while subscription functions were being called were not being published.
