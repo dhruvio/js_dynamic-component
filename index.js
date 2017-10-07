@@ -39,7 +39,7 @@ function bind (state, render, element) {
     tree = newTree;
   }
 
-  return state;
+  return root;
 }
 
 function createState (state) {
