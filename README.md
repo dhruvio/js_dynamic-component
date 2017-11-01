@@ -1,4 +1,4 @@
-# dynamic-componet
+# dynamic-component
 
 Minimal functional components for websites. This library is a thin wrapper around `virtual-dom`.
 
